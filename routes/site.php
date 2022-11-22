@@ -20,4 +20,8 @@ use Illuminate\Support\Facades\Route;
 // Route::controller(App\Http\Controllers\Dashboard\UserController::class)->group(function () {
 
 //     Route::get('/','test');
-//     Route::get('welcome','welcome')
+//     Route::get('welcome','welcome');
+// });
+
+
+

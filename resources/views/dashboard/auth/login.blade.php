@@ -17,7 +17,7 @@
                     <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                         <span>الدخول للوحة التحكم </span>
                     </h6>
-                </div>     
+                </div>
                 @include("dashboard.includes.alerts.success")
                 @include("dashboard.includes.alerts.errors")
                 <div class="card-content">

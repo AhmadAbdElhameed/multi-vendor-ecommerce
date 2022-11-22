@@ -14,8 +14,7 @@ class LoginController extends Controller
 
 
     public function postLogin(AdminLoginRequest $request){
-
-        $remember_me = $request->has('remember_me')? ture : false;
+        $remember_me = ($request->get('remember_me') == 'on') ? true : false;
 
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"),"password" => $request->input("password")],$remember_me)){
             return redirect()->route("admin.dashboard");

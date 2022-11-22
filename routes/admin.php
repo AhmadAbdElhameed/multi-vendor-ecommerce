@@ -24,20 +24,39 @@ use Illuminate\Support\Facades\Route;
 
 
 /// Note : there is prefix in (Authenticate) file for all file route
-Route::middleware(['auth','admin'])->group(function () {
 
-    Route::get('dashboard', [App\Http\Controllers\Dashboard\UserController::class, 'index'])->name("admin.dashboard");
-    Route::get('home', [App\Http\Controllers\Dashboard\UserController::class, 'home']);
+
+// Route::middleware(['auth','admin'])->group(function () {
+
+//     });
+
+
+
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
+    //The First Page admin will visit after logining
+    Route::get('/', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name("admin.dashboard");
+
     });
 
-Route::controller(App\Http\Controllers\Dashboard\LoginController::class)->group(function () {
-
-    // Route::get('login', function () {
-    //     return "Welcome to login";
-    // })->name('admin.login');
 
 
-    Route::get('login','login')->name('admin.login');
-    Route::post('login','postLogin')->name('admin.login.post');
+// Route::controller(App\Http\Controllers\Dashboard\LoginController::class)->group(function () {
+
+//     // Route::get('login', function () {
+//     //     return "Welcome to login";
+//     // })->name('admin.login');
+
+//     //Route::get('/dash', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name("admin.dash");
+
+//     Route::get('login','login')->name('admin.login');
+//     Route::post('login','postLogin')->name('admin.login.post');
+//     });
+
+
+
+
+
+Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {
+        Route::get('login', [App\Http\Controllers\Dashboard\LoginController::class, 'login'])->name('admin.login');
+        Route::post('login', [App\Http\Controllers\Dashboard\LoginController::class, 'postLogin'])->name('admin.login.post');
     });
-
