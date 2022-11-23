@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('settings', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('id')->unique();
+            $table->string('key')->unique();
             $table->boolean('is_translatable')->default(false);
             $table->text('plain_value')->nullable();
             $table->timestamps();
@@ -30,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('settings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('settings');
     }
 };
