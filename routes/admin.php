@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-/// Note : there is prefix in (Authenticate) file for all file route
+
 
 
 // Route::middleware(['auth','admin'])->group(function () {
@@ -32,11 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
-    //The First Page admin will visit after logining
-    Route::get('/', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name("admin.dashboard");
 
-    });
 
 
 
@@ -54,9 +50,31 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
 
 
 
+Route::group([
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ],
+    function(){
 
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {
+/// Note : there is prefix in (Authenticate) file for all file route
+    Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin','prefix'=>'admin'], function () {
+        //The First Page admin will visit after logining
+        Route::get('/', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name("admin.dashboard");
+
+        Route::prefix('settings')->group(function () {
+            Route::get('shipping-methods/{type}',[App\Http\Controllers\Dashboard\SettingsController::class,'editShippingMethods'])->name("edit.shipping.methods");
+            Route::put('shipping-methods/{id}',[App\Http\Controllers\Dashboard\SettingsController::class,'updateShippingMethods'])->name("update.shipping.methods");
+
+            });
+
+    });
+
+    Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin','prefix'=>'admin'], function () {
         Route::get('login', [App\Http\Controllers\Dashboard\LoginController::class, 'login'])->name('admin.login');
         Route::post('login', [App\Http\Controllers\Dashboard\LoginController::class, 'postLogin'])->name('admin.login.post');
     });
+
+
+
+});
