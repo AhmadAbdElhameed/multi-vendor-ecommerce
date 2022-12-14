@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ShippingRequest;
 use App\Models\Setting;
-
+use DB;
 class SettingsController extends Controller
 {
     public function editShippingMethods($type){
@@ -26,7 +27,30 @@ class SettingsController extends Controller
     }
 
 
-    public function updateShippingMethods($id){
+    public function updateShippingMethods(ShippingRequest $request, $id){
+
+
+        // validation
+
+        // update
+
+        try{
+            $shipping_method = Setting::find($id);
+
+            DB::beginTransaction();
+            $shipping_method -> update(['plain_value' => $request -> plain_value]);
+
+            // save tranlation
+
+            $shipping_method -> value = $request -> value;
+            $shipping_method -> save();
+
+            DB::commit();
+            return redirect()-> back() -> with(['success' => 'تم التحديث بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()-> back() -> with(['error' => 'هناك خطا ما يرجي المحاوله لاحقا']);
+            DB::rollback();
+        }
 
     }
 }
