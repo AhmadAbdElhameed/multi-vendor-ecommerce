@@ -42,35 +42,12 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" action="{{route('update.shipping.methods',$shippingMethod -> id)}}"
-                                            method="PUT"
+                                            method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
 
                                             <input type="hidden" name="id" value="{{$shippingMethod -> id}}">
-
-
-
-                                            {{-- <div class="form-group">
-                                                <div class="text-center">
-                                                    <img
-                                                        src="{{$vendor  -> logo}}"
-                                                        class="rounded-circle  height-250" alt="صورة القسم  ">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label> لوجو التجار </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="logo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('logo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div> --}}
-
 
 
 
@@ -96,11 +73,11 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> قيمة التوصيل </label>
-                                                            <input type="number" value="" id="palin_value"
+                                                            <input type="number" value="{{$shippingMethod -> plain_value}}" id="plain_value"
                                                                 class="form-control"
                                                                 placeholder="  "
-                                                                name="palin_value">
-                                                            @error("palin_value")
+                                                                name="plain_value">
+                                                            @error("plain_value")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
