@@ -68,6 +68,12 @@ Route::group([
             Route::put('shipping-methods/{id}',[App\Http\Controllers\Dashboard\SettingsController::class,'updateShippingMethods'])->name("update.shipping.methods");
 
             });
+        Route::prefix('profile')->group(function () {
+            Route::get('edit',[App\Http\Controllers\Dashboard\ProfileController::class,'editProfile'])->name("edit.profile");
+            Route::put('update',[App\Http\Controllers\Dashboard\ProfileController::class,'updateProfile'])->name("update.profile");
+            //Route::put('update.password',[App\Http\Controllers\Dashboard\ProfileController::class,'updatePassword'])->name("update.profile.password");
+
+            });
 
     });
 
