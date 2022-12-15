@@ -61,6 +61,7 @@ Route::group([
     Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin','prefix'=>'admin'], function () {
         //The First Page admin will visit after logining
         Route::get('/', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name("admin.dashboard");
+        Route::get('/logout', [App\Http\Controllers\Dashboard\LoginController::class, 'logout'])->name("admin.logout");
 
         Route::prefix('settings')->group(function () {
             Route::get('shipping-methods/{type}',[App\Http\Controllers\Dashboard\SettingsController::class,'editShippingMethods'])->name("edit.shipping.methods");
