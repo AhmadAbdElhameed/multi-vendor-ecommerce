@@ -47,4 +47,7 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
+    public function scopeParent($query){
+        return $query -> whereNull('parent_id');
+    }
 }
