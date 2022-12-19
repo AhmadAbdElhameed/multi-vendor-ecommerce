@@ -9,11 +9,22 @@ use App\Models\Category;
 class MainCategoriesController extends Controller
 {
     public function index(){
-        return $categories = Category::parent() -> paginate(PAGINATION_COUNT);
-        //return view('dashboard.categories.index',compact('categories'));
+        $categories = Category::parent() -> paginate(PAGINATION_COUNT);
+        return view('dashboard.categories.index',compact('categories'));
     }
     public function create(){
 
 
+    }
+    public function edit($id){
+
+        $category = Category::find($id);
+
+        if (!$category){
+            return redirect()->route('admin.main_categories')->with(['error' => 'هذا القسم غير موجود']);
+
+        }
+
+        return view('dashboard.categories.edit',compact('category'));
     }
 }
