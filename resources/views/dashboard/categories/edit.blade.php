@@ -94,7 +94,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput1"> اسم بالرابط
                                                             </label>
-                                                            <input type="text" id="name"
+                                                            <input type="text" id="slug"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    value="{{$category -> slug}}"
