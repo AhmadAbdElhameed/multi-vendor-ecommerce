@@ -74,6 +74,18 @@ Route::group([
             //Route::put('update.password',[App\Http\Controllers\Dashboard\ProfileController::class,'updatePassword'])->name("update.profile.password");
 
             });
+###################################### Categories Routes #####################################################################
+        Route::prefix('main_categories')->group(function () {
+            Route::get('/',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'index'])->name("admin.main_categories");
+            Route::get('create',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'create'])->name("admin.main_categories.create");
+            Route::post('store',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'store'])->name("admin.main_categories.store");
+            Route::get('edit/{id}',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'edit'])->name("admin.main_categories.edit");
+            Route::post('update/{id}',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'update'])->name("admin.main_categories.update");
+            Route::get('delete/{id}',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'delete'])->name("admin.main_categories.delete");
+            Route::get('changeStatus/{id}',[App\Http\Controllers\Dashboard\MainCategoriesController::class,'changeStatus'])->name("admin.main_categories.status");
+
+            });
+###################################### End Categories Routes #####################################################################
 
     });
 
