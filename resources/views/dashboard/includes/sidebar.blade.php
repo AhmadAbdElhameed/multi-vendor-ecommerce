@@ -31,11 +31,11 @@
                         class="badge badge badge-danger badge-pill float-right mr-2">{{App\Models\MainCategory::defaultCategory() ->count()}}</span> --}}
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
+                    <li class="active"><a class="menu-item" href="{{route('admin.main_categories')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                                           {{-- {{route('admin.maincategories')}} --}}
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
+                    <li><a class="menu-item" href="{{route('admin.main_categories.create')}}" data-i18n="nav.dash.crypto">أضافة
                              قسم جديد </a>
                              {{-- {{route('admin.maincategories.create')}} --}}
                     </li>
