@@ -15,7 +15,7 @@ class MainCategoriesController extends Controller
     }
     public function create(){
 
-
+        return view('dashboard.categories.create');
     }
     public function edit($id){
 
@@ -57,5 +57,26 @@ class MainCategoriesController extends Controller
         }catch(\Exception $ex){
             return redirect()->route('admin.main_categories')->with(['error' => 'حدث خطأ ما برجاء المحاولة لاحقا']);
         }
+    }
+
+    public function delete($id){
+
+        try{
+
+        // get the category by id
+        $category = Category::orderBy('id','DESC')->find($id);
+
+        if(!$category){
+            return redirect()->route('admin.main_categories')->with(['error' => 'هذا القسم غير موجود']);
+        }
+
+        $category -> delete();
+
+        return redirect()->route('admin.main_categories')->with(['success' => 'تم الحذف بنجاح']);
+
+    }catch(\Exception $ex){
+        return redirect()->route('admin.main_categories')->with(['error' => 'حدث خطأ ما برجاء المحاولة لاحقا']);
+    }
+
     }
 }
